@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "dims-fancy-time",
+	"version": "1.0",
+	"name": "Dim's Fancy Time",
+	"description": "Have you ever wanted to see the in-game time while you're out mining, but you don't have a clock? Or have you ever been roleplaying with your friends, only to realize that you can't meet up in your world because you never seem to be able to tell each other exactly when? With Dim's Fancy Time, you can!",
+	"authors": [
+		"ItzReallyDim"
+	],
+	"contact": {
+		"homepage": "https://github.com/itzreallydim/dims-fancy-time",
+		"sources": "https://github.com/itzreallydim/dims-fancy-time"
+	},
+	"license": "MIT",
+	"icon": "assets/dims-fancy-time/dims-fancy-time-icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.dim.fancytime.DimSFancyTime"
+		],
+		"client": [
+			"com.dim.fancytime.DimsFancyTimeClient"
+		],
+		"modmenu": [
+			"com.dim.fancytime.ConfigMenu"
+		]
+	},
+	"mixins": [
+		"dims-fancy-time.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
