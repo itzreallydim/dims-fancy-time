@@ -15,6 +15,8 @@ Well, for one, I don't know how to code exceptionally well either! But, I made s
 1. **Different positions.** If you use other mods that occupy the default space of the clock element, or just want to have the clock in another place, you can choose from 3 wonderful presets: top left, top center, and top right.
 2. **Saving the positions.** The mod stores your preferred position in a config file, so when you close Minecraft it knows where to place the clock in the next launch.
 
+And, of course, let's not forget the other *life changing* and *life saving* feature added in v1.1.0, that being a 12/24h toggle for my friends who are used to different time formats!
+
 ## FAQ
 
 #### Does Dim's Fancy Time need to be downloaded in my server?
@@ -31,7 +33,7 @@ Unfortunately not. While this feature would be great, I am not sure if it exists
 
 ### Mod Menu by Terraformers (optional - needed for clock configuration, e.g. positions.)
 
-## Credits and License
+## Credits, License and Changelog
 
 ### Credits
 
@@ -44,5 +46,14 @@ Made using IntelliJ IDEA.
 ### License
 
 This mod is licensed under the **MIT License**. Feel free to add it in your modpacks, but credit me! I am not liable for damages.
+
+### Changelog
+
+Version 1.1.0
+* Added: 12/24h time format toggle.
+* Changed: Configuration menu now uses Yet Another Config Lib (YACL) for a cleaner interface!
+
+Version 1.0.0
+* Added: Initial release.
 
 
