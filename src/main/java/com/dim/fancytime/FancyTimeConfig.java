@@ -9,10 +9,12 @@ import java.nio.file.Path;
 
 public class FancyTimeConfig {
     public static HudPosition currentPosition = HudPosition.TOP_LEFT;
+    public static TimeFormat currentTimeFormat = TimeFormat.HOUR_24;
 
     public static void save() {
         FancyTimeConfigData data = new FancyTimeConfigData(); //Creates fresh instance of the data holder
         data.position = currentPosition; //Copies the current value into the file, what we want saved.
+        data.timeFormat = currentTimeFormat;
 
         Gson gson = new Gson(); //Creates the translator tool
         String json = gson.toJson(data); //Hands Gson the data object, and it automatically converts into a JSON-formatted string
@@ -33,6 +35,10 @@ public class FancyTimeConfig {
                 Gson gson = new Gson();
                 FancyTimeConfigData data = gson.fromJson(json, FancyTimeConfigData.class); //Converts JSON text -> object. The FancyTimeConfigData.class part tells Gson to rebuild this as a FancyTimeConfigData object, matching the shape we saved it in.
                 currentPosition = data.position; //Copy the loaded value into the shared field, so the mod can see the restored value.
+                if (data.timeFormat != null){
+                    currentTimeFormat = data.timeFormat;
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

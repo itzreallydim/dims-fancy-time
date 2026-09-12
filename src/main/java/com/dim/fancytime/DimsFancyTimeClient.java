@@ -27,7 +27,17 @@ import net.minecraft.client.Minecraft;
         int hours = (int)(totalMinutes / 60); //Rounds up the decimals.
         int minutes = (int)(totalMinutes % 60);
 
-        String formattedTime = String.format("%02d:%02d", hours, minutes); //Tells the element to format time in HH:MM.
+        String amPM = (hours < 12) ? "AM" : "PM"; //If hours < 12 is true the expression becomes AM, otherwise it becomes PM.
+            String formattedTime = String.format("%02d:%02d", hours, minutes); //Keeps the original formattedLine as the default (the 24-hour one), so if the player's format is HOUR_24 nothing below the if block runs
+
+            if (FancyTimeConfig.currentTimeFormat == TimeFormat.HOUR_12) {
+                int displayHours = hours % 12;
+                if (displayHours == 0) {
+                    displayHours = 12;
+                }
+                formattedTime = String.format("%02d:%02d %s", displayHours, minutes, amPM);
+            }
+
 
             int textWidth = Minecraft.getInstance().font.width(formattedTime);
             int x;

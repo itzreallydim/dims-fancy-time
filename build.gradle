@@ -13,6 +13,11 @@ repositories {
 		name = "Terraformers"
 		url = "https://maven.terraformersmc.com/"
 	}
+
+	maven {
+		name = "IsXander"
+		url = "https://maven.isxander.dev/releases"
+	}
 }
 
 dependencies {
@@ -22,6 +27,9 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	//Yet Another Config Lib, which is used for the brand new config menu introduced in 1.1!
+	implementation"dev.isxander:yet-another-config-lib:${project.yacl_version}"
 
 	//This is Mod Menu, it lets you change the settings of Dim's Fancy Time.
 	compileOnly "com.terraformersmc:modmenu:${project.modmenu_version}"
