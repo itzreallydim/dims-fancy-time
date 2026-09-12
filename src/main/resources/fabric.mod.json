@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "dims-fancy-time",
-	"version": "1.0",
+	"version": "${version}",
 	"name": "Dim's Fancy Time",
 	"description": "Have you ever wanted to see the in-game time while you're out mining, but you don't have a clock? Or have you ever been roleplaying with your friends, only to realize that you can't meet up in your world because you never seem to be able to tell each other exactly when? With Dim's Fancy Time, you can!",
 	"authors": [
