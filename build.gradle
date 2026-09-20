@@ -65,6 +65,8 @@ jar {
 	def projectName = project.name
 	inputs.property "projectName", projectName
 
+	archiveVersion = "${project.version}+${project.minecraft_version}"
+
 	from("LICENSE") {
 		rename { "${it}_$projectName"}
 	}

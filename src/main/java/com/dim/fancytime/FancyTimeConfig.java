@@ -10,11 +10,15 @@ import java.nio.file.Path;
 public class FancyTimeConfig {
     public static HudPosition currentPosition = HudPosition.TOP_LEFT;
     public static TimeFormat currentTimeFormat = TimeFormat.HOUR_24;
+    public static boolean shadowEnabled = true;
+    public static int currentColor = 0xFFFFFFFF;
 
     public static void save() {
         FancyTimeConfigData data = new FancyTimeConfigData(); //Creates fresh instance of the data holder
         data.position = currentPosition; //Copies the current value into the file, what we want saved.
         data.timeFormat = currentTimeFormat;
+        data.shadowEnabled = shadowEnabled;
+        data.currentColor = currentColor;
 
         Gson gson = new Gson(); //Creates the translator tool
         String json = gson.toJson(data); //Hands Gson the data object, and it automatically converts into a JSON-formatted string
@@ -37,6 +41,12 @@ public class FancyTimeConfig {
                 currentPosition = data.position; //Copy the loaded value into the shared field, so the mod can see the restored value.
                 if (data.timeFormat != null){
                     currentTimeFormat = data.timeFormat;
+                }
+                if (data.shadowEnabled != null){
+                    shadowEnabled = data.shadowEnabled;
+                }
+                if (data.currentColor != null){
+                    currentColor = data.currentColor;
                 }
 
             } catch (IOException e) {

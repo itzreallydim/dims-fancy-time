@@ -5,8 +5,12 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 import dev.isxander.yacl3.api.ConfigCategory;
 import dev.isxander.yacl3.api.Option;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.controller.ColorControllerBuilder;
 import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
 import net.minecraft.network.chat.Component;
+import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
+
+import java.awt.*;
 
 public class ConfigMenu implements ModMenuApi {
     @Override
@@ -36,6 +40,25 @@ public class ConfigMenu implements ModMenuApi {
                                 .controller(opt -> EnumControllerBuilder.create(opt)
                                         .enumClass(TimeFormat.class)
                                         .formatValue(v -> Component.literal(v.getDisplayName())))
+                                .build())
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Component.literal("Text shadow"))
+                                .binding(
+                                        true,
+                                        () -> FancyTimeConfig.shadowEnabled,
+                                        (value) -> FancyTimeConfig.shadowEnabled = value
+                                )
+                                .controller(TickBoxControllerBuilder::create)
+                                .build())
+                        .option(Option.<Color>createBuilder()
+                                .name(Component.literal("Clock text color"))
+                                .binding(
+                                        new Color(0xFFFFFFFF, true),
+                                        () -> new Color (FancyTimeConfig.currentColor, true), //Wraps the stored int into a Color object when YACL asks for the current value
+                                        (value) -> FancyTimeConfig.currentColor = value.getRGB()
+                                )
+                                .controller(opt -> ColorControllerBuilder.create(opt)
+                                        )
                                 .build())
                         .build())
                 .save(FancyTimeConfig::save)

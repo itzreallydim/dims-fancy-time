@@ -49,6 +49,6 @@ import net.minecraft.client.Minecraft;
                 default -> x = 10;
             }
 
-            graphics.text(Minecraft.getInstance().font, formattedTime, x, y, 0xFFFFFFFF);
+            graphics.text(Minecraft.getInstance().font, formattedTime, x, y, FancyTimeConfig.currentColor, FancyTimeConfig.shadowEnabled);
         }
     }

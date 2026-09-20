@@ -1,6 +1,4 @@
-![Dim's Fancy Time icon](https://raw.githubusercontent.com/itzreallydim/dims-fancy-time/main/images/icon-final.png)
-# Dim's Fancy Time
-**By ItzReallyDim**
+![Dim's Fancy Time icon](https://raw.githubusercontent.com/itzreallydim/dims-fancy-time/main/images/dims_fancy_time.png)
 
 ## About
 Have you ever wanted to see the in-game time while you're out mining, but you don't have a clock? Or have you ever been roleplaying with your friends, only to realize that you can't meet up in your world because you never seem to be able to tell each other exactly when? With Dim's Fancy Time, you can!
@@ -15,7 +13,7 @@ Well, for one, I don't know how to code exceptionally well either! But, I made s
 1. **Different positions.** If you use other mods that occupy the default space of the clock element, or just want to have the clock in another place, you can choose from 3 wonderful presets: top left, top center, and top right.
 2. **Saving the positions.** The mod stores your preferred position in a config file, so when you close Minecraft it knows where to place the clock in the next launch.
 
-And, of course, let's not forget the other *life changing* and *life saving* feature added in v1.1.0, that being a 12/24h toggle for my friends who are used to different time formats!
+And, of course, let's not forget the other *life changing* and *life saving* feature added in v1.1.0, that being a 12/24h toggle for my friends who are used to different time formats! And the other features added in 1.2 and so on and so forth. Please check the changelog :)
 
 ## FAQ
 
@@ -29,7 +27,9 @@ Unfortunately not. While this feature would be great, I am not sure if it exists
 
 ## Dependencies
 
-### Fabric API (mandatory)
+### Fabric API by modmuss50 (mandatory)
+
+### Yet Another Config Lib by isXander (mandatory)
 
 ### Mod Menu by Terraformers (optional - needed for clock configuration, e.g. positions.)
 
@@ -50,10 +50,9 @@ This mod is licensed under the **MIT License**. Feel free to add it in your modp
 ### Changelog
 
 Version 1.1.0
+* Added: Color picker and remove/enable shadow button.
+
+Version 1.1.0
 * Added: 12/24h time format toggle.
 * Changed: Configuration menu now uses Yet Another Config Lib (YACL) for a cleaner interface!
-
-Version 1.0.0
-* Added: Initial release.
-
 

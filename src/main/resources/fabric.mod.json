@@ -9,7 +9,8 @@
 	],
 	"contact": {
 		"homepage": "https://github.com/itzreallydim/dims-fancy-time",
-		"sources": "https://github.com/itzreallydim/dims-fancy-time"
+		"sources": "https://github.com/itzreallydim/dims-fancy-time",
+		"issues": "https://github.com/itzreallydim/dims-fancy-time/issues"
 	},
 	"license": "MIT",
 	"icon": "assets/dims-fancy-time/dims-fancy-time-icon.png",
@@ -30,7 +31,7 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.19.5",
-		"minecraft": "~26.2",
+		"minecraft": "~26.3",
 		"java": ">=25",
 		"fabric-api": "*",
 		"yet_another_config_lib_v3": "*"
