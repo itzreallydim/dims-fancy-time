@@ -49,10 +49,10 @@ This mod is licensed under the **MIT License**. Feel free to add it in your modp
 
 ### Changelog
 
-Version 1.1.0
-* Added: Color picker and remove/enable shadow button.
+Version 1.3.0
+* Added: Sleep reminder feature, which gently reminds you that you can sleep now! Can be set to Enabled, Disabled, or Only in Survival.
+  (Also added descriptions in the config menu)
 
-Version 1.1.0
-* Added: 12/24h time format toggle.
-* Changed: Configuration menu now uses Yet Another Config Lib (YACL) for a cleaner interface!
+Version 1.2.0
+* Added: Color picker and remove/enable shadow button.
 

@@ -12,6 +12,7 @@ public class FancyTimeConfig {
     public static TimeFormat currentTimeFormat = TimeFormat.HOUR_24;
     public static boolean shadowEnabled = true;
     public static int currentColor = 0xFFFFFFFF;
+    public static SleepChime sleepChime = SleepChime.ENABLED;
 
     public static void save() {
         FancyTimeConfigData data = new FancyTimeConfigData(); //Creates fresh instance of the data holder
@@ -19,6 +20,7 @@ public class FancyTimeConfig {
         data.timeFormat = currentTimeFormat;
         data.shadowEnabled = shadowEnabled;
         data.currentColor = currentColor;
+        data.sleepChime = sleepChime;
 
         Gson gson = new Gson(); //Creates the translator tool
         String json = gson.toJson(data); //Hands Gson the data object, and it automatically converts into a JSON-formatted string
@@ -48,6 +50,10 @@ public class FancyTimeConfig {
                 if (data.currentColor != null){
                     currentColor = data.currentColor;
                 }
+                if (data.sleepChime != null){
+                    sleepChime = data.sleepChime;
+                }
+
 
             } catch (IOException e) {
                 e.printStackTrace();

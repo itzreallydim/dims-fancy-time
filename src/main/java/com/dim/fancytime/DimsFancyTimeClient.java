@@ -6,8 +6,10 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.GameType;
 
-    public class DimsFancyTimeClient implements ClientModInitializer {
+public class DimsFancyTimeClient implements ClientModInitializer {
 
         @Override
         public void onInitializeClient() {
@@ -17,7 +19,15 @@ import net.minecraft.client.Minecraft;
                     Identifier.fromNamespaceAndPath(DimSFancyTime.MOD_ID, "fancy_time_hud"),
                     DimsFancyTimeClient::renderHud
             );
+            HudElementRegistry.attachElementBefore(
+                    VanillaHudElements.HOTBAR,
+                    Identifier.fromNamespaceAndPath(DimSFancyTime.MOD_ID, "sleep_chime_hud"),
+                    DimsFancyTimeClient::renderSleepChime
+            );
         }
+
+        private static boolean wasSleepable = false;
+        private static long popupStartTime = -1;
 
         private static void renderHud(GuiGraphicsExtractor graphics, DeltaTracker tickCounter) {
         long timeOfDay = Minecraft.getInstance().level.getOverworldClockTime();
@@ -50,5 +60,29 @@ import net.minecraft.client.Minecraft;
             }
 
             graphics.text(Minecraft.getInstance().font, formattedTime, x, y, FancyTimeConfig.currentColor, FancyTimeConfig.shadowEnabled);
+        }
+
+        private static void renderSleepChime(GuiGraphicsExtractor graphics, DeltaTracker tickCounter) {
+            if (FancyTimeConfig.sleepChime == SleepChime.DISABLED) return; //Basically tells the whole do a chime when the player can sleep function thing to stop working if the player has it disabled. Why did I use such dramatic wording it's literally the most self-explanatory line ever in this class
+            if (FancyTimeConfig.sleepChime == SleepChime.ONLY_IN_SURVIVAL && !(Minecraft.getInstance().gameMode.getPlayerMode() == GameType.SURVIVAL)) return;
+
+
+            long timeOfDay = Minecraft.getInstance().level.getOverworldClockTime() % 24000;
+            boolean canSleepNow = timeOfDay >= 12542; //A comparison expression, timeOfDay >= 12542 comes back either true of false, and that value is stored in this boolean variable.
+
+            if (canSleepNow && !wasSleepable) {
+                wasSleepable = true;
+                popupStartTime = System.currentTimeMillis();
+                Minecraft.getInstance().player.playSound(SoundEvents.NOTE_BLOCK_PLING.value(), 1.0f, 1.0f);
+            } else if (!canSleepNow) {
+                wasSleepable = false;
+            }
+            if (System.currentTimeMillis() - popupStartTime < 3000) {
+                String message = "You can sleep now.";
+                int textWidth = Minecraft.getInstance().font.width(message);
+                int x = (graphics.guiWidth() - textWidth) /2;
+                int y = graphics.guiHeight() -50;
+                graphics.text(Minecraft.getInstance().font, message, x, y, FancyTimeConfig.currentColor, FancyTimeConfig.shadowEnabled);
+            }
         }
     }

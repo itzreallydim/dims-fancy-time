@@ -5,5 +5,6 @@ public class FancyTimeConfigData {
     public TimeFormat timeFormat;
     public Boolean shadowEnabled;
     public Integer currentColor;
+    public SleepChime sleepChime;
 
 }
