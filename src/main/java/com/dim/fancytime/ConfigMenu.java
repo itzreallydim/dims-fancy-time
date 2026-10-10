@@ -8,6 +8,7 @@ import dev.isxander.yacl3.api.OptionDescription;
 import dev.isxander.yacl3.api.YetAnotherConfigLib;
 import dev.isxander.yacl3.api.controller.ColorControllerBuilder;
 import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
+import dev.isxander.yacl3.api.controller.StringControllerBuilder;
 import net.minecraft.network.chat.Component;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 
@@ -54,6 +55,16 @@ public class ConfigMenu implements ModMenuApi {
                                 )
                                 .controller(TickBoxControllerBuilder::create)
                                 .build())
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Component.literal("Clock background"))
+                                .description(OptionDescription.of(Component.literal("Toggles the background behind the clock.")))
+                                .binding(
+                                        false,
+                                        () -> FancyTimeConfig.clockBackground,
+                                        (value) -> FancyTimeConfig.clockBackground = value
+                                )
+                                .controller(TickBoxControllerBuilder::create)
+                                .build())
                         .option(Option.<Color>createBuilder()
                                 .name(Component.literal("Clock text color"))
                                 .description(OptionDescription.of(Component.literal("Lets you change the color of the clock. Also supports hex values!")))
@@ -76,6 +87,16 @@ public class ConfigMenu implements ModMenuApi {
                                 .controller(opt -> EnumControllerBuilder.create(opt)
                                         .enumClass(SleepChime.class)
                                         .formatValue(v -> Component.literal(v.getDisplayName())))
+                                .build())
+                        .option(Option.<String>createBuilder()
+                                .name(Component.literal("Custom sleep reminder text"))
+                                .description(OptionDescription.of(Component.literal("Lets you change the text of the sleep reminder to whatever you like so you can truly fancy up your sleep schedule.")))
+                                .binding(
+                                        "You can sleep now.",
+                                        () -> FancyTimeConfig.customSleepChime,
+                                        (value) -> FancyTimeConfig.customSleepChime = value
+                                )
+                                .controller(StringControllerBuilder::create)
                                 .build())
                         .build())
                 .save(FancyTimeConfig::save)

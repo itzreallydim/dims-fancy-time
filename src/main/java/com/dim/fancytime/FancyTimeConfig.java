@@ -13,6 +13,8 @@ public class FancyTimeConfig {
     public static boolean shadowEnabled = true;
     public static int currentColor = 0xFFFFFFFF;
     public static SleepChime sleepChime = SleepChime.ENABLED;
+    public static String customSleepChime = "You can sleep now.";
+    public static boolean clockBackground = false;
 
     public static void save() {
         FancyTimeConfigData data = new FancyTimeConfigData(); //Creates fresh instance of the data holder
@@ -21,6 +23,8 @@ public class FancyTimeConfig {
         data.shadowEnabled = shadowEnabled;
         data.currentColor = currentColor;
         data.sleepChime = sleepChime;
+        data.customSleepChime = customSleepChime;
+        data.clockBackground = clockBackground;
 
         Gson gson = new Gson(); //Creates the translator tool
         String json = gson.toJson(data); //Hands Gson the data object, and it automatically converts into a JSON-formatted string
@@ -52,6 +56,12 @@ public class FancyTimeConfig {
                 }
                 if (data.sleepChime != null){
                     sleepChime = data.sleepChime;
+                }
+                if (data.customSleepChime != null){
+                    customSleepChime = data.customSleepChime;
+                }
+                if (data.clockBackground != null){
+                    clockBackground = data.clockBackground;
                 }
 
 

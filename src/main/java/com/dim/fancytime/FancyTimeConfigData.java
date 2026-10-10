@@ -6,5 +6,7 @@ public class FancyTimeConfigData {
     public Boolean shadowEnabled;
     public Integer currentColor;
     public SleepChime sleepChime;
+    public String customSleepChime;
+    public Boolean clockBackground;
 
 }
