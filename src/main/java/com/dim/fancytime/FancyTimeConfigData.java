@@ -8,5 +8,7 @@ public class FancyTimeConfigData {
     public SleepChime sleepChime;
     public String customSleepChime;
     public Boolean clockBackground;
+    public Boolean clockEnabled;
+    public ReminderStyle reminderStyle;
 
 }

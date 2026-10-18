@@ -1,5 +1,5 @@
 ![Dim's Fancy Time icon](https://raw.githubusercontent.com/itzreallydim/dims-fancy-time/main/images/dims_fancy_time.png)
-[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord)](https://discord.gg/d74s9fMEvf) [![CurseForge](https://img.shields.io/curseforge/dt/1685163?logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/dims-fancy-time) [![Github](https://img.shields.io/github/v/tag/itzreallydim/dims-fancy-time?logo=github)](https://github.com/itzreallydim/dims-fancy-time)
+[![Discord](https://img.shields.io/badge/Discord-Join-5865F2?logo=discord)](https://discord.gg/d74s9fMEvf) [![CurseForge](https://img.shields.io/curseforge/dt/1685163?logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/dims-fancy-time) [![Github](https://img.shields.io/github/v/tag/itzreallydim/dims-fancy-time?logo=github)](https://github.com/itzreallydim/dims-fancy-time) [![Modrinth](https://img.shields.io/modrinth/dt/dims-fancy-time?logo=modrinth)](https://modrinth.com/mod/dims-fancy-time)
 ## About
 Have you ever wanted to see the in-game time while you're out mining, but you don't have a clock? Or have you ever been roleplaying with your friends, only to realize that you can't meet up in your world because you never seem to be able to tell each other exactly when? With Dim's Fancy Time, you can!
 
@@ -49,13 +49,4 @@ This mod is licensed under the **MIT License**. Feel free to add it in your modp
 
 ### Changelog
 ###### You can get the full changelogs in the CHANGELOG.md file in GitHub, or in Modrinth.
-
-Version 1.4.0
-* Added: Text backdrop for the clock (thanks for the idea Scramble_Vet!), custom sleep reminder text configuration (thanks for the idea winabees!)
-* Fixed: Sleep reminder now doesn't get tucked behind the armor, breathing bubble and horse health bars, and the clock doesn't get tucked behind effects.
-* Technical: Mod now (almost) immune to all NullPointerExceptions!
-
-Version 1.3.0
-* Added: Sleep reminder feature, which gently reminds you that you can sleep now! Can be set to Enabled, Disabled, or Only in Survival.
-  (Also added descriptions in the config menu)
 

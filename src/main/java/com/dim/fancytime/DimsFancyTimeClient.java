@@ -32,6 +32,10 @@ public class DimsFancyTimeClient implements ClientModInitializer {
         private static long popupStartTime = -1;
 
         private static void renderHud(GuiGraphicsExtractor graphics, DeltaTracker tickCounter) {
+
+            //Turns off the clock if you toggled it off
+            if (!FancyTimeConfig.clockEnabled) return;
+
             //Preventing a NullPointerException from level (and player, if I decide to add it in the future)
             if (Minecraft.getInstance().level == null || Minecraft.getInstance().player == null) return;
         long timeOfDay = Minecraft.getInstance().level.getOverworldClockTime();
@@ -95,10 +99,14 @@ public class DimsFancyTimeClient implements ClientModInitializer {
                 wasSleepable = true;
                 popupStartTime = System.currentTimeMillis();
                 Minecraft.getInstance().player.playSound(SoundEvents.NOTE_BLOCK_PLING.value(), 1.0f, 1.0f);
+
+                if (FancyTimeConfig.reminderStyle == ReminderStyle.TOAST){
+                    Minecraft.getInstance().gui.toastManager().addToast(new SleepReminderToast());
+                }
             } else if (!canSleepNow) {
                 wasSleepable = false;
             }
-            if (System.currentTimeMillis() - popupStartTime < 3000) {
+            if (FancyTimeConfig.reminderStyle == ReminderStyle.TEXT && System.currentTimeMillis() - popupStartTime < 3000) {
                 String message = FancyTimeConfig.customSleepChime; //Reads from YOUR custom personalized fancy text!!
                 int textWidth = Minecraft.getInstance().font.width(message);
                 int x = (graphics.guiWidth() - textWidth) /2;

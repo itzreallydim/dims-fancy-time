@@ -2,10 +2,7 @@ package com.dim.fancytime;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import dev.isxander.yacl3.api.ConfigCategory;
-import dev.isxander.yacl3.api.Option;
-import dev.isxander.yacl3.api.OptionDescription;
-import dev.isxander.yacl3.api.YetAnotherConfigLib;
+import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.ColorControllerBuilder;
 import dev.isxander.yacl3.api.controller.EnumControllerBuilder;
 import dev.isxander.yacl3.api.controller.StringControllerBuilder;
@@ -19,8 +16,15 @@ public class ConfigMenu implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parent -> YetAnotherConfigLib.createBuilder()
                 .title(Component.literal("Dim's Fancy Time Settings"))
+
+                //Clock tab
                 .category(ConfigCategory.createBuilder()
-                        .name(Component.literal("General"))
+                        .name(Component.literal("Clock"))
+
+                        .group(OptionGroup.createBuilder()
+                                .name(Component.literal("Cosmetic settings"))
+                                .description(OptionDescription.of(Component.literal("Adjust the clock's position and style.")))
+
                         .option(Option.<HudPosition>createBuilder()
                                 .name(Component.literal("Position"))
                                 .description(OptionDescription.of(Component.literal("Changes the position of the clock on your screen.")))
@@ -33,6 +37,7 @@ public class ConfigMenu implements ModMenuApi {
                                         .enumClass(HudPosition.class)
                                         .formatValue(v -> Component.literal(v.getDisplayName()))) //Implements the gentle looking button text preview thing! Sorry guys I suck at describing what things do like I mean I kind of start the description well but it doesn't end nicely :( excuse me pls
                                 .build())
+
                         .option(Option.<TimeFormat>createBuilder()
                                 .name(Component.literal("12h/24h Time Format"))
                                 .description(OptionDescription.of(Component.literal("Switches before the 12h and 24h time format.")))
@@ -45,6 +50,7 @@ public class ConfigMenu implements ModMenuApi {
                                         .enumClass(TimeFormat.class)
                                         .formatValue(v -> Component.literal(v.getDisplayName())))
                                 .build())
+
                         .option(Option.<Boolean>createBuilder()
                                 .name(Component.literal("Text shadow"))
                                 .description(OptionDescription.of(Component.literal("Toggles the subtle shadow behind the clock.")))
@@ -55,6 +61,7 @@ public class ConfigMenu implements ModMenuApi {
                                 )
                                 .controller(TickBoxControllerBuilder::create)
                                 .build())
+
                         .option(Option.<Boolean>createBuilder()
                                 .name(Component.literal("Clock background"))
                                 .description(OptionDescription.of(Component.literal("Toggles the background behind the clock.")))
@@ -65,6 +72,7 @@ public class ConfigMenu implements ModMenuApi {
                                 )
                                 .controller(TickBoxControllerBuilder::create)
                                 .build())
+
                         .option(Option.<Color>createBuilder()
                                 .name(Component.literal("Clock text color"))
                                 .description(OptionDescription.of(Component.literal("Lets you change the color of the clock. Also supports hex values!")))
@@ -74,8 +82,30 @@ public class ConfigMenu implements ModMenuApi {
                                         (value) -> FancyTimeConfig.currentColor = value.getRGB()
                                 )
                                 .controller(opt -> ColorControllerBuilder.create(opt)
-                                        )
+                                )
                                 .build())
+                                .build())
+
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Component.literal("Enable clock"))
+                                .description(OptionDescription.of(Component.literal("Enables/disables the clock.")))
+                                .binding(
+                                        true,
+                                        () -> FancyTimeConfig.clockEnabled,
+                                        (value) -> FancyTimeConfig.clockEnabled = value
+                                )
+                                .controller(TickBoxControllerBuilder::create)
+                                .build())
+                        .build())
+
+                //Sleep reminder tab
+                .category(ConfigCategory.createBuilder()
+                        .name(Component.literal("Sleep reminder"))
+
+                        .group(OptionGroup.createBuilder()
+                                .name(Component.literal("Cosmetic settings"))
+                                .description(OptionDescription.of(Component.literal("Configure the sleep reminder to your liking.")))
+
                         .option(Option.<SleepChime>createBuilder()
                                 .name(Component.literal("Sleep reminder"))
                                 .description(OptionDescription.of(Component.literal("Reminds you that you can sleep with a chime and text popup.")))
@@ -98,6 +128,19 @@ public class ConfigMenu implements ModMenuApi {
                                 )
                                 .controller(StringControllerBuilder::create)
                                 .build())
+                        .option(Option.<ReminderStyle>createBuilder()
+                                .name(Component.literal("Sleep reminder style"))
+                                .description(OptionDescription.of(Component.literal("Changes the way your sleep reminder is shown (text/toast).")))
+                                .binding(
+                                        ReminderStyle.TEXT,
+                                        () -> FancyTimeConfig.reminderStyle,
+                                        (value) -> FancyTimeConfig.reminderStyle = value
+                                )
+                                .controller(opt -> EnumControllerBuilder.create(opt)
+                                        .enumClass(ReminderStyle.class)
+                                        .formatValue(v -> Component.literal(v.getDisplayName())))
+                                .build())
+                                .build())
                         .build())
                 .save(FancyTimeConfig::save)
                 .build()
@@ -107,3 +150,4 @@ public class ConfigMenu implements ModMenuApi {
 
 //I just wanted to add a smiley face here :)
 //Fun fact: this smiley face was in the old FancyTimeConfigScreen class that housed the old menu, which was removed in version 1.1 (with the class officially getting scrapped in 1.2 because I forgot to remove it in 1.1).
+//Also this class was pissing me off because it was a long wall of text prior to 1.5 and the config menu also looked messy in game, so I made it cleaner! I love YACL.

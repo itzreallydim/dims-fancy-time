@@ -34,6 +34,6 @@
 		"minecraft": "~${minecraft_version}",
 		"java": ">=25",
 		"fabric-api": "*",
-		"yet_another_config_lib_v3": "*"
+		"yet_another_config_lib_v3": ">=3.9.7"
 	}
 }

@@ -15,6 +15,8 @@ public class FancyTimeConfig {
     public static SleepChime sleepChime = SleepChime.ENABLED;
     public static String customSleepChime = "You can sleep now.";
     public static boolean clockBackground = false;
+    public static boolean clockEnabled = true;
+    public static ReminderStyle reminderStyle = ReminderStyle.TEXT;
 
     public static void save() {
         FancyTimeConfigData data = new FancyTimeConfigData(); //Creates fresh instance of the data holder
@@ -25,6 +27,8 @@ public class FancyTimeConfig {
         data.sleepChime = sleepChime;
         data.customSleepChime = customSleepChime;
         data.clockBackground = clockBackground;
+        data.clockEnabled = clockEnabled;
+        data.reminderStyle = reminderStyle;
 
         Gson gson = new Gson(); //Creates the translator tool
         String json = gson.toJson(data); //Hands Gson the data object, and it automatically converts into a JSON-formatted string
@@ -33,7 +37,7 @@ public class FancyTimeConfig {
             Path configPath = FabricLoader.getInstance().getConfigDir().resolve("dims-fancy-time.json"); //Builds the file location!
             Files.writeString(configPath, json); //Either creates or overwrites the JSON text on the disk.
         } catch (IOException e) {
-            e.printStackTrace();
+            DimSFancyTime.LOGGER.error("Could not save fancy-time config!", e); //The robust logging java was begging me to add <3
         }
     }
 
@@ -63,10 +67,14 @@ public class FancyTimeConfig {
                 if (data.clockBackground != null){
                     clockBackground = data.clockBackground;
                 }
-
-
+                if (data.clockEnabled != null){
+                    clockEnabled = data.clockEnabled;
+                }
+                if (data.reminderStyle != null){
+                    reminderStyle = data.reminderStyle;
+                }
             } catch (IOException e) {
-                e.printStackTrace();
+                DimSFancyTime.LOGGER.error("Failed to load config file!", e); //The robust logging java was begging me to add <3
             }
         }
     }
