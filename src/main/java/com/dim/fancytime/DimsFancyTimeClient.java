@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.Level;
 
 public class DimsFancyTimeClient implements ClientModInitializer {
 
@@ -91,11 +92,16 @@ public class DimsFancyTimeClient implements ClientModInitializer {
             if (FancyTimeConfig.sleepChime == SleepChime.DISABLED) return; //Basically tells the whole do a chime when the player can sleep function thing to stop working if the player has it disabled. Why did I use such dramatic wording it's literally the most self-explanatory line ever in this class
             if (FancyTimeConfig.sleepChime == SleepChime.ONLY_IN_SURVIVAL && !(Minecraft.getInstance().gameMode.getPlayerMode() == GameType.SURVIVAL)) return; //Checks the gamemode of the player in order for the ONLY_IN_SURVIVAL option to work. If the gamemode is NOT Survival, it does return; (which means give me nothing).
 
-
             long timeOfDay = Minecraft.getInstance().level.getOverworldClockTime() % 24000;
-            boolean canSleepNow = timeOfDay >= 12542; //A comparison expression, timeOfDay >= 12542 comes back either true of false, and that value is stored in this boolean variable.
 
-            if (canSleepNow && !wasSleepable) {
+            //The rain sleep thing
+            Level level = Minecraft.getInstance().level;
+            boolean isRaining = level.isRaining();
+
+            long sleepStartTick = isRaining ? 12010 : 12542; //If it's raining, the sleep window starts at tick 12010, but if it's not, it starts at the normal 12542
+            boolean canSleep = timeOfDay >= sleepStartTick; //Comparison expression, timeOfDay comes back either true or false and then the code stores the vlaue into the boolean variable.
+
+            if (canSleep && !wasSleepable) {
                 wasSleepable = true;
                 popupStartTime = System.currentTimeMillis();
                 Minecraft.getInstance().player.playSound(SoundEvents.NOTE_BLOCK_PLING.value(), 1.0f, 1.0f);
@@ -103,7 +109,7 @@ public class DimsFancyTimeClient implements ClientModInitializer {
                 if (FancyTimeConfig.reminderStyle == ReminderStyle.TOAST){
                     Minecraft.getInstance().gui.toastManager().addToast(new SleepReminderToast());
                 }
-            } else if (!canSleepNow) {
+            } else if (!canSleep) {
                 wasSleepable = false;
             }
             if (FancyTimeConfig.reminderStyle == ReminderStyle.TEXT && System.currentTimeMillis() - popupStartTime < 3000) {
